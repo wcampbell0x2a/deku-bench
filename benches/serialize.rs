@@ -6,11 +6,11 @@ use binrw::{
     BinWriterExt,
 };
 use criterion::{criterion_group, criterion_main, BatchSize, Criterion};
-use deku::{bitvec::BitView, ctx::Limit, prelude::*, DekuRead, DekuWrite};
+use deku::{ctx::Limit, prelude::*, DekuRead, DekuWrite};
 
 use serde::{Deserialize, Serialize};
 
-#[derive(DekuRead, BinRead, BinWrite, DekuWrite, Serialize, Deserialize)]
+#[derive(DekuRead, BinRead, BinWrite, DekuWrite, Serialize, Deserialize, PartialEq, Eq, Debug)]
 struct Test {
     pub a: u64,
     pub b: u64,
@@ -109,13 +109,20 @@ fn bench_deserialise(c: &mut Criterion) {
     let bincode = bincode::serialize(&input).unwrap();
 
     let mut group = c.benchmark_group("Deserialize");
+    let cursor = std::io::Cursor::new(custom.clone());
     group.bench_function("deku", |b| {
-        b.iter(|| {
-            <Vec<Test> as DekuRead<Limit<_, _>>>::read(
-                custom.view_bits(),
-                Limit::new_count(10_0000),
-            )
-        })
+        b.iter_batched(
+            || cursor.clone(),
+            |mut custom_input| {
+                let mut container = Container::new(&mut custom_input);
+                <Vec<Test> as DekuReader<Limit<_, _>>>::from_reader(
+                    &mut container,
+                    Limit::new_count(10_0000),
+                )
+                .unwrap()
+            },
+            BatchSize::SmallInput,
+        );
     });
     let mut binrw = Cursor::new(custom.clone());
     binrw.set_position(0);
