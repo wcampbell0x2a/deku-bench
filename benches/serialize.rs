@@ -6,7 +6,7 @@ use binrw::{
     BinWriterExt,
 };
 use criterion::{criterion_group, criterion_main, BatchSize, Criterion};
-use deku::{bitvec::BitView, ctx::Limit, prelude::*, DekuRead, DekuWrite};
+use deku::{bitvec::BitView, container, ctx::Limit, prelude::*, DekuRead, DekuWrite};
 
 use serde::{Deserialize, Serialize};
 
@@ -109,10 +109,12 @@ fn bench_deserialise(c: &mut Criterion) {
     let bincode = bincode::serialize(&input).unwrap();
 
     let mut group = c.benchmark_group("Deserialize");
+    let mut cursor = std::io::Cursor::new(custom.clone());
+    let mut container = Container::new(&mut cursor);
     group.bench_function("deku", |b| {
         b.iter(|| {
-            <Vec<Test> as DekuRead<Limit<_, _>>>::read(
-                custom.view_bits(),
+            <Vec<Test> as DekuReader<Limit<_, _>>>::from_reader(
+                &mut container,
                 Limit::new_count(10_0000),
             )
         })
