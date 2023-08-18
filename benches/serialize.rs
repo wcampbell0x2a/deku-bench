@@ -1,4 +1,4 @@
-use std::io::{Cursor, IoSliceMut, Read, Write};
+use std::io::{BufWriter, Cursor, IoSliceMut, Read, Write};
 
 use binrw::{
     BinRead,  // trait for reading
@@ -51,10 +51,12 @@ fn bench_serialise(c: &mut Criterion) {
     let mut group = c.benchmark_group("Serialize");
     group.bench_function("deku", |b| {
         b.iter(|| {
-            let _: Vec<u8> = input
-                .iter()
-                .flat_map(|x| x.to_bytes().unwrap().into_iter())
-                .collect();
+            let out_buf = vec![];
+            let mut writer = BufWriter::new(out_buf);
+            let mut writer = deku::writer::Writer::new(&mut writer);
+            for i in input.iter() {
+                i.to_writer(&mut writer, ()).unwrap()
+            }
         })
     });
     group.bench_function("binrw", |b| {
