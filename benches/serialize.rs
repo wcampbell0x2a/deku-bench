@@ -73,9 +73,6 @@ fn bench_serialise(c: &mut Criterion) {
             }
         })
     });
-    group.bench_function("bincode", |b| {
-        b.iter(|| bincode::serialize(&input).unwrap())
-    });
     group.finish();
     let mut buf = Cursor::new(Vec::new());
     buf.write_le(&input).unwrap();
@@ -92,8 +89,6 @@ fn bench_serialise(c: &mut Criterion) {
         i.to_bytes_custom(&mut custom)
     }
     assert_eq!(binrw, custom);
-    // bincode is different
-    // assert_eq!(custom, bincode::serialize(&input).unwrap());
 }
 
 fn bench_deserialise(c: &mut Criterion) {
@@ -108,7 +103,6 @@ fn bench_deserialise(c: &mut Criterion) {
     for i in input.iter() {
         i.to_bytes_custom(&mut custom)
     }
-    let bincode = bincode::serialize(&input).unwrap();
 
     let mut group = c.benchmark_group("Deserialize");
     let cursor = std::io::Cursor::new(custom.clone());
@@ -149,9 +143,6 @@ fn bench_deserialise(c: &mut Criterion) {
             },
             BatchSize::SmallInput,
         );
-    });
-    group.bench_function("bincode", |b| {
-        b.iter(|| bincode::deserialize::<Vec<Test>>(&bincode).unwrap())
     });
     group.finish();
 }
