@@ -1,9 +1,9 @@
 ```
-Serialize/deku          time:   [132.18 ms 132.80 ms 133.48 ms]
-Serialize/binrw         time:   [3.5337 ms 3.5958 ms 3.6736 ms]
-Serialize/custom        time:   [2.8064 ms 2.8220 ms 2.8389 ms]
+Serialize/deku          time:   [130.15 ms 131.07 ms 132.13 ms]
+Serialize/binrw         time:   [3.5203 ms 3.5367 ms 3.5541 ms]
+Serialize/custom        time:   [2.7066 ms 2.7204 ms 2.7372 ms]
 
-Deserialize/deku        time:   [30.099 ms 30.473 ms 30.919 ms]
-Deserialize/binrw       time:   [7.6728 ms 7.7609 ms 7.8713 ms]
-Deserialize/custom      time:   [8.6965 ms 8.7758 ms 8.8678 ms]
+Deserialize/deku        time:   [6.5554 ms 6.6193 ms 6.6960 ms]
+Deserialize/custom      time:   [8.7328 ms 9.0074 ms 9.3586 ms]
+Deserialize/binrw       time:   [7.4867 ms 7.5734 ms 7.6786 ms]
 ```
