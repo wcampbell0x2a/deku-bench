@@ -9,8 +9,6 @@ use binrw::{
 use criterion::{criterion_group, criterion_main, BatchSize, Criterion};
 use deku::{ctx::Limit, prelude::*, DekuRead, DekuWrite};
 
-use serde::{Deserialize, Serialize};
-
 #[derive(DekuRead, BinRead, BinWrite, DekuWrite, PartialEq, Eq, Debug, Default)]
 #[deku(endian = "little")]
 pub struct SuperBlock {
