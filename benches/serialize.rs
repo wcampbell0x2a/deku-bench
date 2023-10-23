@@ -206,7 +206,7 @@ fn bench_deserialise(c: &mut Criterion) {
     let cursor = std::io::Cursor::new(custom.clone());
     group.bench_function("deku", |b| {
         b.iter_batched(
-            || std::io::BufReader::new(cursor.clone()),
+            || cursor.clone(),
             |mut reader| {
                 let mut a = SuperBlock::default();
                 for _ in 0..10_0000 {
