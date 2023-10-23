@@ -9,8 +9,6 @@ use binrw::{
 use criterion::{criterion_group, criterion_main, BatchSize, Criterion};
 use deku::{ctx::Limit, prelude::*, DekuRead, DekuWrite};
 
-use serde::{Deserialize, Serialize};
-
 #[derive(DekuRead, BinRead, BinWrite, DekuWrite, PartialEq, Eq, Debug, Default)]
 #[deku(endian = "little")]
 pub struct SuperBlock {
@@ -208,7 +206,7 @@ fn bench_deserialise(c: &mut Criterion) {
     let cursor = std::io::Cursor::new(custom.clone());
     group.bench_function("deku", |b| {
         b.iter_batched(
-            || std::io::BufReader::new(cursor.clone()),
+            || cursor.clone(),
             |mut reader| {
                 let mut a = SuperBlock::default();
                 for _ in 0..10_0000 {
