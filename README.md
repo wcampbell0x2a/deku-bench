@@ -1,10 +1,48 @@
 # Deku Benchmark
-This currently tracks the benchmark of deku MR [impl-reader](https://github.com/sharksforarms/deku/pull/352).
+This currently tracks the benchmark of the deku MR [impl-writer-979afff](https://github.com/sharksforarms/deku/pull/355).
 
 # Results
-![Benchmark](benchmark.svg)
+```
+$ cargo +stable bench
+```
 
-# Recreate
+![Deserialize Benchmark](deserialize.svg)
+![Serialize Benchmark](serialize.svg)
+
+
+# Benchmark details
+
+<details><summary>rust version</summary>
+
 ```
-$ cargo bench
+$ cargo +stable --version
+cargo 1.73.0 (9c4383fb5 2023-08-26)
 ```
+
+</details>
+
+<details><summary>lscpu</summary>
+
+```
+$ lscpu
+Architecture:            x86_64
+  CPU op-mode(s):        32-bit, 64-bit
+  Address sizes:         39 bits physical, 48 bits virtual
+  Byte Order:            Little Endian
+CPU(s):                  4
+  On-line CPU(s) list:   0-3
+Vendor ID:               GenuineIntel
+  Model name:            Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+    CPU family:          6
+    Model:               78
+    Thread(s) per core:  2
+    Core(s) per socket:  2
+    Socket(s):           1
+    Stepping:            3
+    CPU(s) scaling MHz:  80%
+    CPU max MHz:         3000.0000
+    CPU min MHz:         400.0000
+    BogoMIPS:            5001.23
+```
+
+</details>
