@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 binrw = "0.11.2"
 bitvec = "1.0.1"
-deku = { git = "https://github.com/sharksforarms/deku/", branch = "impl-reader" }
+deku = { git = "https://github.com/sharksforarms/deku/", branch = "impl-writer" }
 
 [dev-dependencies]
 criterion = "0.3"
