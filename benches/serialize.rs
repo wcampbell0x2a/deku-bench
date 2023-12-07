@@ -243,7 +243,7 @@ fn bench_deserialise(c: &mut Criterion) {
             |mut binrw_input| {
                 let mut a = SuperBlock::default();
                 for i in 0..10_0000 {
-                    a = SuperBlock::read_le(&mut binrw_input).expect(&format!("{i}"));
+                    a = SuperBlock::read_le(&mut binrw_input).unwrap();
                 }
                 assert_eq!(a.magic, 10_0000 - 1);
             },
