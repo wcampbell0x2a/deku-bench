@@ -1,9 +1,9 @@
 # Deku Benchmark
-This currently tracks the benchmark of the deku MR [impl-writer-979afff](https://github.com/sharksforarms/deku/pull/355).
+This currently tracks the benchmark of the deku branch [impl-writer-inline-1fa84fc](https://github.com/sharksforarms/deku/tree/impl-writer-inline-read-bytes).
 
 # Results
 ```
-$ cargo +stable bench
+$ cargo +stable bench --profile perf
 ```
 
 ![Deserialize Benchmark](deserialize.svg)
