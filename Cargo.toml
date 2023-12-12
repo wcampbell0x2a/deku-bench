@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 binrw = "0.11.2"
 bitvec = "1.0.1"
-deku = { git = "https://github.com/sharksforarms/deku/", branch = "impl-writer" }
+deku = { git = "https://github.com/sharksforarms/deku/", branch = "impl-writer-inline-read-bytes" }
 
 [dev-dependencies]
 criterion = "0.3"
@@ -16,3 +16,8 @@ criterion = "0.3"
 [[bench]]
 name = "serialize"
 harness = false
+
+[profile.perf]
+inherits = "release"
+lto = "fat"
+codegen-units = 1
