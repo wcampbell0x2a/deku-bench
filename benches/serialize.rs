@@ -151,9 +151,9 @@ fn bench_serialise(c: &mut Criterion) {
     let mut group = c.benchmark_group("Serialize");
     group.bench_function("deku", |b| {
         b.iter(|| {
+            // Deku doesn't need `Seek`, so no Cursor
             let out_buf = vec![];
-            let mut writer = BufWriter::new(out_buf);
-            let mut writer = deku::writer::Writer::new(&mut writer);
+            let mut writer = deku::writer::Writer::new(out_buf);
             for i in input.iter() {
                 i.to_writer(&mut writer, ()).unwrap()
             }
