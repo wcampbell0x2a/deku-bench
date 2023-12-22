@@ -260,6 +260,7 @@ dependencies = [
 [[package]]
 name = "deku"
 version = "0.16.0"
+source = "git+https://github.com/sharksforarms/deku/?branch=impl-writer-inline-read-bytes#0799b60025a7468184cf292d60a3ab16fe7e2c1b"
 dependencies = [
  "bitvec",
  "deku_derive",
@@ -279,6 +280,7 @@ dependencies = [
 [[package]]
 name = "deku_derive"
 version = "0.16.0"
+source = "git+https://github.com/sharksforarms/deku/?branch=impl-writer-inline-read-bytes#0799b60025a7468184cf292d60a3ab16fe7e2c1b"
 dependencies = [
  "darling",
  "proc-macro-crate",
