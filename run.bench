@@ -1,0 +1,6 @@
+set -ex
+cargo +stable  bench -- --save-baseline stable
+cargo +nightly bench -- --save-baseline nightly
+cargo +stable  bench --profile perf -- --save-baseline stable-perf
+cargo +nightly bench --profile perf -- --save-baseline nightly-perf
+critcmp stable nightly stable-perf nightly-perf

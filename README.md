@@ -15,7 +15,7 @@ $ cargo +stable bench --profile perf
 <details><summary>rust version</summary>
 
 ```
-$ cargo +stable --version
+$ cargo +nightly --version
 cargo 1.73.0 (9c4383fb5 2023-08-26)
 ```
 
