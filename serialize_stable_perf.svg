@@ -10,6 +10,7 @@
 
 <g id="gnuplot_canvas">
 
+<rect width="100%" height="100%" fill="white" />
 <rect x="0" y="0" width="1280" height="275" fill="none"/>
 <defs>
 
