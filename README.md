@@ -1,25 +1,31 @@
 # Deku Benchmark
-This currently tracks the benchmark of the deku branch [impl-writer-inline-1fa84fc](https://github.com/sharksforarms/deku/tree/impl-writer-inline-read-bytes).
+This currently tracks the benchmark of the deku branch [impl-writer-inline-dbb38](https://github.com/sharksforarms/deku/tree/impl-writer-inline-read-bytes).
 
-# Results
+## Stable
+### --profile perf
 ```
 $ cargo +stable bench --profile perf
 ```
 
-![Deserialize Benchmark](deserialize.svg)
-![Serialize Benchmark](serialize.svg)
+![Deserialize Benchmark](deserialize_stable_perf.svg)
+![Serialize Benchmark](serialize_stable_perf.svg)
 
-
-# Benchmark details
-
-<details><summary>rust version</summary>
-
+### --release
 ```
-$ cargo +stable --version
-cargo 1.73.0 (9c4383fb5 2023-08-26)
+$ cargo +stable bench
 ```
 
-</details>
+![Deserialize Benchmark](deserialize_stable_release.svg)
+![Serialize Benchmark](serialize_stable_release.svg)
+
+### nightly
+`./run.bench`
+![Critcmp](2024-04-04-000306_1403x148_scrot.png)
+
+
+## Benchmark details
+
+rust version: See `rust-toolchain.toml`
 
 <details><summary>lscpu</summary>
 
