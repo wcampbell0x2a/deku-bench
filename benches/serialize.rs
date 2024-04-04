@@ -57,92 +57,104 @@ impl SuperBlock {
         writer.write(&self.export_table.to_le_bytes()).unwrap();
     }
 
-    fn from_bytes_custom<T: Read>(reader: &mut T) -> Self {
-        let (
-            mut a,
-            mut b,
-            mut c,
-            mut d,
-            mut e,
-            mut f,
-            mut g,
-            mut h,
-            mut i,
-            mut j,
-            mut k,
-            mut l,
-            mut m,
-            mut n,
-            mut o,
-            mut p,
-            mut q,
-            mut r,
-            mut s,
-        ) = (
-            [0; mem::size_of::<u32>()], // magic
-            [0; mem::size_of::<u32>()], // inode_count
-            [0; mem::size_of::<u32>()], // mod_time
-            [0; mem::size_of::<u32>()], // block_size
-            [0; mem::size_of::<u32>()], // frag_count
-            [0; mem::size_of::<u16>()], // compressor
-            [0; mem::size_of::<u16>()], // block_log
-            [0; mem::size_of::<u16>()], // flags
-            [0; mem::size_of::<u16>()], // id_count
-            [0; mem::size_of::<u16>()], // version_major
-            [0; mem::size_of::<u16>()], // version_minor
-            [0; mem::size_of::<u64>()], // root_inode
-            [0; mem::size_of::<u64>()], // bytes_used
-            [0; mem::size_of::<u64>()], // id_table
-            [0; mem::size_of::<u64>()], // xattr_table
-            [0; mem::size_of::<u64>()], // inode_table
-            [0; mem::size_of::<u64>()], // dir_table
-            [0; mem::size_of::<u64>()], // frag_table
-            [0; mem::size_of::<u64>()], // export_table
-        );
-        let mut buf = [
-            IoSliceMut::new(&mut a),
-            IoSliceMut::new(&mut b),
-            IoSliceMut::new(&mut c),
-            IoSliceMut::new(&mut d),
-            IoSliceMut::new(&mut e),
-            IoSliceMut::new(&mut f),
-            IoSliceMut::new(&mut g),
-            IoSliceMut::new(&mut h),
-            IoSliceMut::new(&mut i),
-            IoSliceMut::new(&mut j),
-            IoSliceMut::new(&mut k),
-            IoSliceMut::new(&mut l),
-            IoSliceMut::new(&mut m),
-            IoSliceMut::new(&mut n),
-            IoSliceMut::new(&mut o),
-            IoSliceMut::new(&mut p),
-            IoSliceMut::new(&mut q),
-            IoSliceMut::new(&mut r),
-            IoSliceMut::new(&mut s),
-        ];
-        let len = reader.read_vectored(&mut buf).unwrap();
-        assert_eq!(len, 96);
-        Self {
-            magic: u32::from_le_bytes(a),
-            inode_count: u32::from_le_bytes(b),
-            mod_time: u32::from_le_bytes(c),
-            block_size: u32::from_le_bytes(d),
-            frag_count: u32::from_le_bytes(e),
-            compressor: u16::from_le_bytes(f),
-            block_log: u16::from_le_bytes(g),
-            flags: u16::from_le_bytes(h),
-            id_count: u16::from_le_bytes(i),
-            version_major: u16::from_le_bytes(j),
-            version_minor: u16::from_le_bytes(k),
-            root_inode: u64::from_le_bytes(l),
-            bytes_used: u64::from_le_bytes(m),
-            id_table: u64::from_le_bytes(n),
-            xattr_table: u64::from_le_bytes(o),
-            inode_table: u64::from_le_bytes(p),
-            dir_table: u64::from_le_bytes(q),
-            frag_table: u64::from_le_bytes(r),
-            export_table: u64::from_le_bytes(s),
-        }
+    fn from_bytes_custom<T: Read>(reader: &mut T) -> std::io::Result<Self> {
+        let mut magic = [0; 4];
+        reader.read_exact(&mut magic)?;
+        let magic = u32::from_le_bytes(magic);
+
+        let mut inode_count = [0; 4];
+        reader.read_exact(&mut inode_count)?;
+        let inode_count = u32::from_le_bytes(inode_count);
+
+        let mut mod_time = [0; 4];
+        reader.read_exact(&mut mod_time)?;
+        let mod_time = u32::from_le_bytes(mod_time);
+
+        let mut block_size = [0; 4];
+        reader.read_exact(&mut block_size)?;
+        let block_size = u32::from_le_bytes(block_size);
+
+        let mut frag_count = [0; 4];
+        reader.read_exact(&mut frag_count)?;
+        let frag_count = u32::from_le_bytes(frag_count);
+
+        let mut compressor = [0; 2];
+        reader.read_exact(&mut compressor)?;
+        let compressor = u16::from_le_bytes(compressor);
+
+        let mut block_log = [0; 2];
+        reader.read_exact(&mut block_log)?;
+        let block_log = u16::from_le_bytes(block_log);
+
+        let mut flags = [0; 2];
+        reader.read_exact(&mut flags)?;
+        let flags = u16::from_le_bytes(flags);
+
+        let mut id_count = [0; 2];
+        reader.read_exact(&mut id_count)?;
+        let id_count = u16::from_le_bytes(id_count);
+
+        let mut version_major = [0; 2];
+        reader.read_exact(&mut version_major)?;
+        let version_major = u16::from_le_bytes(version_major);
+
+        let mut version_minor = [0; 2];
+        reader.read_exact(&mut version_minor)?;
+        let version_minor = u16::from_le_bytes(version_minor);
+
+        let mut root_inode = [0; 8];
+        reader.read_exact(&mut root_inode)?;
+        let root_inode = u64::from_le_bytes(root_inode);
+
+        let mut bytes_used = [0; 8];
+        reader.read_exact(&mut bytes_used)?;
+        let bytes_used = u64::from_le_bytes(bytes_used);
+
+        let mut id_table = [0; 8];
+        reader.read_exact(&mut id_table)?;
+        let id_table = u64::from_le_bytes(id_table);
+
+        let mut xattr_table = [0; 8];
+        reader.read_exact(&mut xattr_table)?;
+        let xattr_table = u64::from_le_bytes(xattr_table);
+
+        let mut inode_table = [0; 8];
+        reader.read_exact(&mut inode_table)?;
+        let inode_table = u64::from_le_bytes(inode_table);
+
+        let mut dir_table = [0; 8];
+        reader.read_exact(&mut dir_table)?;
+        let dir_table = u64::from_le_bytes(dir_table);
+
+        let mut frag_table = [0; 8];
+        reader.read_exact(&mut frag_table)?;
+        let frag_table = u64::from_le_bytes(frag_table);
+
+        let mut export_table = [0; 8];
+        reader.read_exact(&mut export_table)?;
+        let export_table = u64::from_le_bytes(export_table);
+
+        Ok(Self {
+            magic,
+            inode_count,
+            mod_time,
+            block_size,
+            frag_count,
+            compressor,
+            block_log,
+            flags,
+            id_count,
+            version_major,
+            version_minor,
+            root_inode,
+            bytes_used,
+            id_table,
+            xattr_table,
+            inode_table,
+            dir_table,
+            frag_table,
+            export_table,
+        })
     }
 }
 
@@ -227,7 +239,7 @@ fn bench_deserialise(c: &mut Criterion) {
             |mut reader| {
                 let mut a = SuperBlock::default();
                 for _ in 0..10_0000 {
-                    a = SuperBlock::from_bytes_custom(&mut reader);
+                    a = SuperBlock::from_bytes_custom(&mut reader).unwrap();
                 }
                 assert_eq!(a.magic, 10_0000 - 1);
             },
