@@ -1,54 +1,21 @@
 # Deku Benchmark
-This currently tracks the benchmark of the deku branch [impl-writer-inline-read-bytes](https://github.com/sharksforarms/deku/tree/impl-writer-inline-read-bytes).
+This currently tracks the benchmark of the deku branch 
+[impl-writer-inline-read-bytes](https://github.com/sharksforarms/deku/tree/impl-writer-inline-read-bytes).
 
-## Stable
-### --profile perf
-```
-$ cargo +stable bench --profile perf
-```
+This only touches the surface of comparison of `deku`, `binrw`, and `custom` and only tests
+basic struct byte only reading.
 
-![Deserialize Benchmark](deserialize_stable_perf.svg)
-![Serialize Benchmark](serialize_stable_perf.svg)
+## `+stable --profile=perf`
+- [Full Results](https://wcampbell0x2a.github.io/deku-bench/perf/report/index.html)
+![Deserialize](https://wcampbell0x2a.github.io/deku-bench/perf/Deserialize/report/violin.svg)
+![Serialize](https://wcampbell0x2a.github.io/deku-bench/perf/Serialize/report/violin.svg)
 
-### --release
-```
-$ cargo +stable bench
-```
+## `+stable --release`
+- [Full Results](https://wcampbell0x2a.github.io/deku-bench/release/report/index.html)
+![Deserialize](https://wcampbell0x2a.github.io/deku-bench/release/Deserialize/report/violin.svg)
+![Serialize](https://wcampbell0x2a.github.io/deku-bench/release/Serialize/report/violin.svg)
 
-![Deserialize Benchmark](deserialize_stable_release.svg)
-![Serialize Benchmark](serialize_stable_release.svg)
-
-### nightly
+### Nightly Compare
 `./run.bench`
+nightly rust version: See `rust-toolchain.toml`
 ![Critcmp](critcmp.png)
-
-
-## Benchmark details
-
-rust version: See `rust-toolchain.toml`
-
-<details><summary>lscpu</summary>
-
-```
-$ lscpu
-Architecture:            x86_64
-  CPU op-mode(s):        32-bit, 64-bit
-  Address sizes:         39 bits physical, 48 bits virtual
-  Byte Order:            Little Endian
-CPU(s):                  4
-  On-line CPU(s) list:   0-3
-Vendor ID:               GenuineIntel
-  Model name:            Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
-    CPU family:          6
-    Model:               78
-    Thread(s) per core:  2
-    Core(s) per socket:  2
-    Socket(s):           1
-    Stepping:            3
-    CPU(s) scaling MHz:  80%
-    CPU max MHz:         3000.0000
-    CPU min MHz:         400.0000
-    BogoMIPS:            5001.23
-```
-
-</details>
