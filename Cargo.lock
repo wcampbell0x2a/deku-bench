@@ -252,7 +252,7 @@ dependencies = [
 [[package]]
 name = "deku"
 version = "0.16.0"
-source = "git+https://github.com/sharksforarms/deku/?branch=impl-writer-inline-read-bytes#a78d76b9178c0c8d4c7dca3b69576a28137d6c47"
+source = "git+https://github.com/sharksforarms/deku/?branch=impl-writer-inline-read-bytes#6c78f9905862367c83dfabf9c4b93862dbd8dcb2"
 dependencies = [
  "bitvec",
  "deku_derive",
@@ -272,7 +272,7 @@ dependencies = [
 [[package]]
 name = "deku_derive"
 version = "0.16.0"
-source = "git+https://github.com/sharksforarms/deku/?branch=impl-writer-inline-read-bytes#a78d76b9178c0c8d4c7dca3b69576a28137d6c47"
+source = "git+https://github.com/sharksforarms/deku/?branch=impl-writer-inline-read-bytes#6c78f9905862367c83dfabf9c4b93862dbd8dcb2"
 dependencies = [
  "darling",
  "proc-macro-crate",
@@ -307,9 +307,9 @@ checksum = "e6d5a32815ae3f33302d95fdcb2ce17862f8c65363dcfd29360480ba1001fc9c"
 
 [[package]]
 name = "half"
-version = "2.4.0"
+version = "2.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b5eceaaeec696539ddaf7b333340f1af35a5aa87ae3e4f3ead0532f72affab2e"
+checksum = "6dd08c532ae367adf81c312a4580bc67f1d0fe8bc9c460520283f4c0ff277888"
 dependencies = [
  "cfg-if",
  "crunchy",
