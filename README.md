@@ -1,5 +1,5 @@
 # Deku Benchmark
-This currently tracks the benchmark of the deku branch [impl-writer-inline-dbb38](https://github.com/sharksforarms/deku/tree/impl-writer-inline-read-bytes).
+This currently tracks the benchmark of the deku branch [impl-writer-inline-read-bytes](https://github.com/sharksforarms/deku/tree/impl-writer-inline-read-bytes).
 
 ## Stable
 ### --profile perf
@@ -20,7 +20,7 @@ $ cargo +stable bench
 
 ### nightly
 `./run.bench`
-![Critcmp](2024-04-04-000306_1403x148_scrot.png)
+![Critcmp](critcmp.png)
 
 
 ## Benchmark details
