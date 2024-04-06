@@ -22,7 +22,7 @@ jobs:
       - run: mkdir -p dist/release
       - run: mv target/criterion/* dist/release/
       - run: cargo +stable bench --profile perf
-      - run: mkdir -p _site/perf
+      - run: mkdir -p dist/perf
       - run: mv target/criterion/* dist/perf/
       - name: Fix permissions
         run: |
