@@ -19,18 +19,22 @@ jobs:
         with:
           toolchain: stable
       - run: cargo +stable bench
-      - run: mkdir -p _site/release
-      - run: mv target/criterion/* _site/release/
+      - run: mkdir -p dist/release
+      - run: mv target/criterion/* dist/release/
       - run: cargo +stable bench --profile perf
       - run: mkdir -p _site/perf
-      - run: mv target/criterion/* _site/perf/
+      - run: mv target/criterion/* dist/perf/
       - name: Fix permissions
         run: |
-          chmod -c -R +rX "_site/" | while read line; do
+          chmod -c -R +rX "dist/" | while read line; do
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        id: github-pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: "github-pages"
+          path: "dist"
 
   # Deploy
   deploy:
@@ -40,6 +44,8 @@ jobs:
     needs: bench
 
     steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v4
