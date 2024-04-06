@@ -1,0 +1,30 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+
+jobs:
+  fmt-clippy-stable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
+      - uses: dtolnay/rust-toolchain@be73d7920c329f220ce78e0234b8f96b7ae60248 # master
+        with:
+          toolchain: stable
+      - run: cargo +stable bench
+      - run: mkdir -p _site/release
+      - run: mv target/criterion/* _site/release/
+      - run: cargo +stable bench --profile perf
+      - run: mkdir -p _site/perf
+      - run: mv target/criterion/* _site/perf/
+      - name: Fix permissions
+        run: |
+          chmod -c -R +rX "_site/" | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
