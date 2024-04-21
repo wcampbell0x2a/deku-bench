@@ -1,4 +1,6 @@
 use core::mem;
+use nom_derive::*;
+
 use std::io::{BufWriter, Cursor, IoSliceMut, Read, Write};
 
 use binrw::{
@@ -9,8 +11,9 @@ use binrw::{
 use criterion::{criterion_group, criterion_main, BatchSize, Criterion};
 use deku::{ctx::Limit, prelude::*, DekuRead, DekuWrite};
 
-#[derive(DekuRead, BinRead, BinWrite, DekuWrite, PartialEq, Eq, Debug, Default)]
+#[derive(Nom, DekuRead, BinRead, BinWrite, DekuWrite, PartialEq, Eq, Debug, Default)]
 #[deku(endian = "little")]
+#[nom(LittleEndian)]
 pub struct SuperBlock {
     magic: u32,
     inode_count: u32,
@@ -225,6 +228,22 @@ fn bench_deserialise(c: &mut Criterion) {
                 let mut a = SuperBlock::default();
                 for _ in 0..10_0000 {
                     a = SuperBlock::from_reader((&mut reader, 0)).unwrap().1;
+                }
+                assert_eq!(a.magic, 10_0000 - 1);
+            },
+            BatchSize::SmallInput,
+        );
+    });
+
+    group.bench_function("nom-derive", |b| {
+        b.iter_batched(
+            || cursor.clone(),
+            |mut reader| {
+                let mut a = SuperBlock::default();
+                for _ in 0..10_0000 {
+                    let mut buf = [0; mem::size_of::<SuperBlock>()];
+                    reader.read_exact(&mut buf).unwrap();
+                    a = SuperBlock::parse(&mut buf).unwrap().1;
                 }
                 assert_eq!(a.magic, 10_0000 - 1);
             },
