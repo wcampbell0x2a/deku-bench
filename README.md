@@ -1,6 +1,6 @@
 # Deku Benchmark
 This currently tracks the benchmark of the deku branch 
-[impl-writer-inline-read-bytes](https://github.com/sharksforarms/deku/tree/impl-writer-inline-read-bytes).
+[master(e92700a)](https://github.com/sharksforarms/deku/commit/e92700a).
 
 This only touches the surface of comparison of `deku`, `binrw`, and `custom` and only tests
 basic struct byte only reading.

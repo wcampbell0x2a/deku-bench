@@ -9,7 +9,7 @@ bench = false
 [dependencies]
 binrw = "0.11.2"
 bitvec = "1.0.1"
-deku = { git = "https://github.com/sharksforarms/deku/", branch = "impl-writer-inline-read-bytes" }
+deku = { git = "https://github.com/sharksforarms/deku/", branch = "master" }
 
 [dev-dependencies]
 criterion = { version = "0.5", features = ["html_reports"] }
