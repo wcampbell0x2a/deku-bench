@@ -1,9 +1,9 @@
 # Deku Benchmark
-This currently tracks the benchmark of the deku branch 
-[impl-writer-inline-read-bytes](https://github.com/sharksforarms/deku/tree/impl-writer-inline-read-bytes).
+This currently tracks the benchmark of the deku version 0.17.0.
 
-This only touches the surface of comparison of `deku`, `binrw`, and `custom` and only tests
-basic struct byte only reading.
+> [!WARNING]
+> This only touches the surface of comparison of `deku`, `binrw`, and `custom` and only tests
+  basic struct byte only reading.
 
 ## `+stable --profile=perf`
 - [Full Results](https://wcampbell0x2a.github.io/deku-bench/perf/report/index.html)
