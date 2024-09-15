@@ -1,6 +1,8 @@
 set -ex
 cargo +stable  bench -- --save-baseline stable
 cargo bench -- --save-baseline nightly
-cargo +stable  bench --profile perf -- --save-baseline stable-perf
+cargo +stable bench --profile perf -- --save-baseline stable-perf
 cargo bench --profile perf -- --save-baseline nightly-perf
-critcmp stable nightly stable-perf nightly-perf
+cargo +stable bench --features deku-bits --profile perf -- --save-baseline stable-perf-deku-bits
+cargo bench --profile perf --features deku-bits -- --save-baseline nightly-perf-deku-bits
+critcmp stable nightly stable-perf nightly-perf stable-perf-deku-bits nightly-perf-deku-bits
