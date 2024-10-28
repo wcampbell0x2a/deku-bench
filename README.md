@@ -12,7 +12,7 @@
 | `deku`  | `^0.18.0`  | `deafult-features = false, features = ["std"]`    |
 | `birnw` | `^0.14.0`  |          |
 
-### My Hardware Nightly Compare
+## My Hardware Nightly Compare
 `$ ./run.bench`
 
 - nightly rust version: See `rust-toolchain.toml`
@@ -58,14 +58,14 @@ NUMA:
 
 </details>
 
-### Perf Reports In CI
+## Perf Reports In CI
 
 > [!WARNING]
 > I don't control the hardware these run on.
 
-## `cargo +stable bench --profile=perf`
+### `cargo +stable bench --profile=perf`
 - [Full Results](https://wcampbell0x2a.github.io/deku-bench/perf/report/index.html)
 
-## `cargo +stable bench --release`
+### `cargo +stable bench --release`
 - [Full Results](https://wcampbell0x2a.github.io/deku-bench/release/report/index.html)
 
