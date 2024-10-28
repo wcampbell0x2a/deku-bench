@@ -1,21 +1,18 @@
 # Deku Benchmark
-This currently tracks the benchmark of the deku version 0.17.0.
 
 > [!WARNING]
 > This only touches the surface of comparison of `deku`, `binrw`, and `custom` and only tests
   basic struct byte only reading.
 
-## `+stable --profile=perf`
-- [Full Results](https://wcampbell0x2a.github.io/deku-bench/perf/report/index.html)
-![Deserialize](https://wcampbell0x2a.github.io/deku-bench/perf/Deserialize/report/violin.svg)
-![Serialize](https://wcampbell0x2a.github.io/deku-bench/perf/Serialize/report/violin.svg)
+> [!WARNING]
+> These are my own benchmarks, and haven't been confirmed for validity.
 
-## `+stable --release`
-- [Full Results](https://wcampbell0x2a.github.io/deku-bench/release/report/index.html)
-![Deserialize](https://wcampbell0x2a.github.io/deku-bench/release/Deserialize/report/violin.svg)
-![Serialize](https://wcampbell0x2a.github.io/deku-bench/release/Serialize/report/violin.svg)
+| Crate   | Version    | Features |
+| --------| -----------| -------- |
+| `deku`  | `^0.18.0`  | `deafult-features = false, features = ["std"]`    |
+| `birnw` | `^0.14.0`  |          |
 
-### Nightly Compare
+### My Hardware Nightly Compare
 `$ ./run.bench`
 
 - nightly rust version: See `rust-toolchain.toml`
@@ -60,3 +57,15 @@ NUMA:
 ```
 
 </details>
+
+### Perf Reports In CI
+
+> [!WARNING]
+> I don't control the hardware these run on.
+
+## `cargo +stable bench --profile=perf`
+- [Full Results](https://wcampbell0x2a.github.io/deku-bench/perf/report/index.html)
+
+## `cargo +stable bench --release`
+- [Full Results](https://wcampbell0x2a.github.io/deku-bench/release/report/index.html)
+
