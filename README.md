@@ -63,9 +63,9 @@ NUMA:
 > [!WARNING]
 > I don't control the hardware these run on.
 
-### `cargo +stable bench --profile=perf`
+### `cargo +1.87.0 bench --profile=perf`
 - [Full Results](https://wcampbell0x2a.github.io/deku-bench/perf/report/index.html)
 
-### `cargo +stable bench --release`
+### `cargo +1.87.0 bench --release`
 - [Full Results](https://wcampbell0x2a.github.io/deku-bench/release/report/index.html)
 
