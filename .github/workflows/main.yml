@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
-      - uses: dtolnay/rust-toolchain@be73d7920c329f220ce78e0234b8f96b7ae60248 # master
+      - uses: dtolnay/rust-toolchain@b3b07ba8b418998c39fb20f53e8b695cdcc8de1b # master
         with:
-          toolchain: stable
-      - run: cargo +stable bench
+          toolchain: 1.87.0
+      - run: cargo +1.87.0 bench
       - run: mkdir -p dist/release
       - run: mv target/criterion/* dist/release/
-      - run: cargo +stable bench --profile perf
+      - run: cargo +1.87.0 bench --profile perf
       - run: mkdir -p dist/perf
       - run: mv target/criterion/* dist/perf/
       - name: Fix permissions
