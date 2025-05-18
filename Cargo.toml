@@ -9,7 +9,7 @@ bench = false
 [dependencies]
 binrw = "0.14.0"
 bitvec = "1.0.1"
-deku = { version = "0.18.0", default-features = false, features = ["std"] }
+deku = { version = "0.19.0", default-features = false, features = ["std"] }
 
 [dev-dependencies]
 criterion = { version = "0.5", features = ["html_reports"] }
