@@ -9,7 +9,7 @@
 
 | Crate   | Version    | Features |
 | --------| -----------| -------- |
-| `deku`  | `^0.18.0`  | `deafult-features = false, features = ["std"]`    |
+| `deku`  | `^0.19.0`  | `default-features = false, features = ["std"]`    |
 | `birnw` | `^0.14.0`  |          |
 
 ## My Hardware Nightly Compare
