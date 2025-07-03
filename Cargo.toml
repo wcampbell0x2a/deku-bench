@@ -7,7 +7,7 @@ edition = "2021"
 bench = false
 
 [dependencies]
-binrw = "0.14.0"
+binrw = "0.15.0"
 bitvec = "1.0.1"
 deku = { version = "0.19.1", default-features = false, features = ["std"] }
 
